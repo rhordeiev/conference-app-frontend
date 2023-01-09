@@ -55,7 +55,7 @@ export default function EditConferencePage() {
   const getConference = async (conferenceId) => {
     try {
       const response = await fetch(
-        `${process.env.API_URL}/conference/list?id=${conferenceId}`,
+        `${process.env.API_URL}conference/list?id=${conferenceId}`,
       );
       const responseJSON = await response.json();
       return responseJSON.data;
@@ -66,7 +66,7 @@ export default function EditConferencePage() {
 
   const deleteConference = async (conferenceId) => {
     try {
-      await fetch(`${process.env.API_URL}/conference/${conferenceId}`, {
+      await fetch(`${process.env.API_URL}conference/${conferenceId}`, {
         method: 'DELETE',
       });
       navigate('/');
@@ -105,7 +105,7 @@ export default function EditConferencePage() {
     newConferenceData.append('lng', conferenceLng);
     newConferenceData.append('country', selectRef.current.value);
     try {
-      await fetch(`${process.env.API_URL}/conference/${id}`, {
+      await fetch(`${process.env.API_URL}conference/${id}`, {
         method: 'PUT',
         headers: {
           Accept: 'application/json',

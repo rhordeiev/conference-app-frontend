@@ -9,7 +9,7 @@ export default function ConferencesPage() {
 
   const getAllConferences = async () => {
     try {
-      const response = await fetch(`${process.env.API_URL}/conference/list`);
+      const response = await fetch(`${process.env.API_URL}conference/list`);
       const responseJSON = await response.json();
       return responseJSON.data;
     } catch (error) {
@@ -20,7 +20,7 @@ export default function ConferencesPage() {
   const deleteConference = async (event) => {
     const conferenceId = event.target.parentNode.parentNode.id;
     try {
-      await fetch(`${process.env.API_URL}/conference/${conferenceId}`, {
+      await fetch(`${process.env.API_URL}conference/${conferenceId}`, {
         method: 'DELETE',
       });
       setConferences(

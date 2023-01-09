@@ -25,7 +25,7 @@ export default function ConferencePage() {
   const getConference = async (conferenceId) => {
     try {
       const response = await fetch(
-        `${process.env.API_URL}/conference/list?id=${conferenceId}`,
+        `${process.env.API_URL}conference/list?id=${conferenceId}`,
       );
       const responseJSON = await response.json();
       return responseJSON.data;
@@ -36,7 +36,7 @@ export default function ConferencePage() {
 
   const deleteConference = async (conferenceId) => {
     try {
-      await fetch(`${process.env.API_URL}/conference/${conferenceId}`, {
+      await fetch(`${process.env.API_URL}conference/${conferenceId}`, {
         method: 'DELETE',
       });
       navigate('/');
@@ -95,23 +95,27 @@ export default function ConferencePage() {
           </Form.Label>
           <Form.Control type="date" value={conferenceDate} readOnly />
         </Form.Group>
-        <Form.Group controlId="formConferenceLocation" className="mt-3 mb-3">
-          <Form.Label>
-            <h6>Address</h6>
-          </Form.Label>
-          <LoadScript googleMapsApiKey={process.env.GOOGLE_MAPS_API_KEY}>
-            <GoogleMap
-              mapContainerStyle={containerStyle}
-              zoom={6}
-              center={{
-                lat: conferenceLat || 48.3794,
-                lng: conferenceLng || 31.1656,
-              }}
-            >
-              <MarkerF position={{ lat: conferenceLat, lng: conferenceLng }} />
-            </GoogleMap>
-          </LoadScript>
-        </Form.Group>
+        {(conferenceLat !== null || conferenceLng !== null) && (
+          <Form.Group controlId="formConferenceLocation" className="mt-3 mb-3">
+            <Form.Label>
+              <h6>Address</h6>
+            </Form.Label>
+            <LoadScript googleMapsApiKey={process.env.GOOGLE_MAPS_API_KEY}>
+              <GoogleMap
+                mapContainerStyle={containerStyle}
+                zoom={6}
+                center={{
+                  lat: conferenceLat || 48.3794,
+                  lng: conferenceLng || 31.1656,
+                }}
+              >
+                <MarkerF
+                  position={{ lat: conferenceLat, lng: conferenceLng }}
+                />
+              </GoogleMap>
+            </LoadScript>
+          </Form.Group>
+        )}
         <Form.Group controlId="formConferenceCountry" className="mt-3 mb-3">
           <Form.Label>
             <h6>Country</h6>

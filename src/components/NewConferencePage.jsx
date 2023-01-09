@@ -36,7 +36,7 @@ export default function NewConferencePage() {
 
   const getAllCountries = async () => {
     try {
-      const response = await fetch(`${process.env.API_URL}/country/list`);
+      const response = await fetch(`${process.env.API_URL}country/list`);
       const responseJSON = await response.json();
       return responseJSON.data;
     } catch (error) {
@@ -58,7 +58,7 @@ export default function NewConferencePage() {
     newConferenceData.append('lng', lng);
     newConferenceData.append('country', selectRef.current.value);
     try {
-      await fetch(`${process.env.API_URL}/conference/new`, {
+      await fetch(`${process.env.API_URL}conference/new`, {
         method: 'POST',
         body: newConferenceData,
       });
